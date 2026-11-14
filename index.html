@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Noël : participez à mes prochaines aventures</title>
+<meta name="theme-color" content="#0c2a21">
+<!-- Polices facultatives : sans connexion, le site utilise Georgia et la police système -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+:root{--fir:#0c2a21;--fir2:#164434;--cream:#f6efdd;--off:#fbf7ee;--bord:#6e1b2e;--gold:#d4af5f;--gold2:#f3d98e;
+--serif:'Cormorant Garamond',Georgia,'Times New Roman',serif;--script:'Pinyon Script','Snell Roundhand',Georgia,serif;
+--sans:Inter,system-ui,-apple-system,'Segoe UI',sans-serif;
+--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font:400 1rem/1.65 var(--sans);color:var(--cream);min-height:100vh;overflow-x:hidden;
+background:radial-gradient(110% 70% at 50% 0,#215a46 0,var(--fir) 55%,#061711 100%) fixed}
+body::before{content:"";position:fixed;inset:0;background:var(--grain);opacity:.7;pointer-events:none;z-index:99}
+#snow{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:98}
+.bokeh{position:fixed;inset:0;pointer-events:none;animation:tw 7s ease-in-out infinite alternate;
+background:radial-gradient(circle at 12% 22%,#f3d98e30,transparent 9%),radial-gradient(circle at 88% 14%,#f3d98e26,transparent 11%),
+radial-gradient(circle at 78% 72%,#a7314a22,transparent 14%),radial-gradient(circle at 20% 85%,#f3d98e1c,transparent 12%)}
+@keyframes tw{to{opacity:.45}}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold2);outline-offset:3px}
+
+/* Boutons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.7rem;padding:1rem 2.2rem;border:0;border-radius:999px;cursor:pointer;
+font:600 1rem var(--sans);color:#2a1a05;background:linear-gradient(135deg,var(--gold2),var(--gold) 55%,#b88f3a);
+box-shadow:0 10px 30px -8px #d4af5f88,inset 0 1px 0 #fff8;transition:transform .3s,box-shadow .3s;position:relative;overflow:hidden}
+.btn::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,#fff9 50%,transparent 65%);transform:translateX(-120%);transition:transform .8s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 16px 36px -8px #d4af5faa,inset 0 1px 0 #fff8}
+.btn:hover::after{transform:translateX(120%)}
+.btn.ghost{background:transparent;color:var(--cream);box-shadow:inset 0 0 0 1px var(--gold)}
+.btn.ghost::after{display:none}
+.btn.ghost:hover{background:#d4af5f22}
+
+/* Accueil : une seule page, sans défilement */
+html,body{height:100%}
+body{height:100dvh;overflow:hidden}
+.stage{position:fixed;inset:0;overflow:hidden}
+.intro{position:relative;z-index:3;text-align:center;margin:0 auto;max-width:min(920px,90vw);padding:clamp(1rem,4.5vh,3rem) 1rem 0}
+.star{font-size:clamp(1rem,2.6vh,1.6rem);color:var(--gold2);text-shadow:0 0 24px #f3d98e;animation:tw 3s ease-in-out infinite alternate}
+.intro h1{font:500 clamp(1.55rem,min(3.7vw,6.3vh),3.7rem)/1.04 var(--serif);letter-spacing:-.012em;margin:.5rem 0 clamp(.6rem,1.8vh,1.2rem);text-wrap:balance;text-shadow:0 4px 40px #0008}
+.lead{max-width:640px;margin:0 auto;color:#efe6cdd0;font-size:clamp(.82rem,min(1.15vw,2.1vh),1.06rem);line-height:1.6}
+.tip{margin-top:clamp(.4rem,1.4vh,.9rem);font:italic clamp(.95rem,2.2vh,1.2rem) var(--serif);color:var(--gold2)}
+.fu{animation:fu 1.1s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:var(--d,0s)}
+@keyframes fu{from{opacity:0;transform:translateY(24px)}}
+.branch{position:absolute;z-index:1;width:clamp(110px,19vw,280px);opacity:.5;pointer-events:none;transform-origin:50% 0;animation:sway 9s ease-in-out infinite alternate}
+.b1{top:-30px;left:-24px;--a:-38deg}
+.b2{top:-30px;right:-24px;--a:38deg}
+@keyframes sway{from{transform:rotate(var(--a))}to{transform:rotate(calc(var(--a) + 5deg))}}
+
+/* Éventail */
+.fan{--w:min(15vw,27vh);--st:16deg;position:absolute;left:50%;bottom:calc(var(--w)*-2.4);width:0;height:0;z-index:2}
+.slot{position:absolute;left:0;bottom:0;width:var(--w);z-index:var(--z);transform-origin:0 100%;
+transform:rotate(calc(var(--k)*var(--st))) translate(-50%,calc(var(--w)*-2.3));pointer-events:none}
+.slot:has(.on),.slot:has(.sel){z-index:8}
+
+/* Enveloppes (format portrait) */
+.env{position:relative;width:100%;aspect-ratio:2/3;cursor:pointer;outline:0;pointer-events:auto;-webkit-tap-highlight-color:transparent;
+transition:transform .55s cubic-bezier(.2,.8,.2,1);animation:drop 1.1s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(.3s + var(--i)*.12s)}
+@keyframes drop{from{opacity:0;transform:translateY(140px)}}
+.env>*{position:absolute;inset:0;border-radius:5px;pointer-events:none}
+.env.on,.env.sel{transform:translateY(-9%) scale(1.05)}
+.env:focus-visible .back{box-shadow:0 0 0 2px var(--gold2)}
+.back{background:var(--grain),var(--p2);box-shadow:0 20px 40px -14px #000d,0 4px 10px #0006;transition:box-shadow .4s}
+.front{z-index:3;clip-path:polygon(0 0,50% 37%,100% 0,100% 100%,0 100%);
+background:var(--grain),
+linear-gradient(118deg,transparent calc(44.2% - .7px),#0003,transparent calc(44.2% + .7px)),
+linear-gradient(242deg,transparent calc(44.2% - .7px),#0003,transparent calc(44.2% + .7px)),
+linear-gradient(165deg,var(--p3),var(--p))}
+.front::after,.flap::after{content:"";position:absolute}
+.flap{inset:0 0 auto;height:37%;z-index:5;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;
+background:var(--grain),linear-gradient(180deg,var(--p3),var(--p));
+transition:transform .65s cubic-bezier(.3,.7,.2,1),z-index 0s .3s,filter .6s}
+.env.on .flap,.env.sel .flap{transform:rotateX(180deg);z-index:1;filter:brightness(.78)}
+.letter{inset:7% 9% 14%;z-index:2;background:var(--grain),#fbf5e4;display:grid;justify-items:center;align-content:start;padding-top:.5rem;
+color:var(--gold);transition:transform .75s cubic-bezier(.3,.7,.2,1);box-shadow:inset 0 0 0 1px #0002}
+.env.on .letter,.env.sel .letter{transform:translateY(-30%)}
+.name{inset:46% 7% 7%;z-index:4;display:grid;place-items:center;text-align:center;font:var(--script);font-size:calc(var(--w)*.15);line-height:1.05;color:var(--ink)}
+.name span{display:block;opacity:0;transform:translateY(14px) scale(.9);filter:blur(5px);letter-spacing:.12em;transition:all .5s cubic-bezier(.2,.8,.2,1)}
+.env.on .name span,.env.sel .name span{opacity:1;transform:none;filter:none;letter-spacing:0;transition:all .9s cubic-bezier(.2,.8,.2,1) .3s;text-shadow:0 1px 0 #0003}
+.seal{inset:auto;left:50%;top:37%;width:calc(var(--w)*.25);aspect-ratio:1;border-radius:50%;translate:-50% -50%;z-index:6;display:grid;place-items:center;
+font:600 calc(var(--w)*.09)/1 var(--serif);color:var(--gold2);background:radial-gradient(circle at 35% 30%,#b13a55,var(--bord) 60%,#3d0c18);
+box-shadow:0 3px 8px #0009,inset 0 0 0 2px #ffffff1a;transition:scale .4s,opacity .3s}
+.env.on .seal,.env.sel .seal{opacity:0;scale:.3}
+.tick{inset:auto;top:-10px;right:-10px;width:32px;height:32px;border-radius:50%;background:var(--gold2);color:var(--fir);display:grid;place-items:center;
+font-weight:700;scale:0;transition:scale .45s cubic-bezier(.3,1.7,.5,1);z-index:7;box-shadow:0 2px 10px #0007}
+.env.sel .tick{scale:1}
+.env.sel .back{box-shadow:0 0 0 2px var(--gold),0 0 46px #f3d98e77,0 20px 40px -14px #000d}
+.glow{inset:-28%;background:radial-gradient(closest-side,#f3d98e55,transparent);opacity:0;transition:opacity .7s;border-radius:50%}
+.env.on .glow,.env.sel .glow{opacity:1}
+.sp{position:absolute;left:50%;top:40%;width:5px;height:5px;border-radius:50%;background:var(--gold2);box-shadow:0 0 9px 2px #f3d98e;z-index:8;pointer-events:none;animation:sp 1.1s ease-out forwards}
+@keyframes sp{to{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0}}
+.e1{--p:#7a1f33;--p2:#551225;--p3:#962c45;--ink:#f6e7c1}
+.e1 .front::after{left:0;right:0;bottom:13%;height:5%;background:linear-gradient(var(--gold2),#a8832f)}
+.e2{--p:#c6a574;--p2:#a2825a;--p3:#d9bf93;--ink:#3b2a17}
+.e2 .seal{background:radial-gradient(circle at 35% 30%,#4f8a6d,#1f5a45 60%,#0c2a21)}
+.e3{--p:#1f5a45;--p2:#12392c;--p3:#2c7157;--ink:#f6e7c1}
+.e3 .front::after{inset:0;background:radial-gradient(circle,#fff6 1.2px,transparent 1.7px) 0 0/15px 15px}
+.e4{--p:#f3ead7;--p2:#d7c9aa;--p3:#fcf6e8;--ink:#6e1b2e}
+.e4 .front::after{inset:0;border:7px solid transparent;border-image:repeating-linear-gradient(135deg,#6e1b2e 0 12px,#f3ead7 12px 22px,#1f5a45 22px 34px) 7}
+.e5{--p:#b88f3a;--p2:#8d6b25;--p3:#d6b060;--ink:#4a0f1d}
+.e5 .front::after,.e5 .flap::after{left:46%;width:8%;top:0;bottom:0;background:linear-gradient(90deg,#4f1020,var(--bord),#4f1020)}
+
+/* Répartition */
+.panel{max-width:1020px;margin:3.5rem auto 0;background:var(--grain),var(--off);color:#1b2b24;border-radius:6px;position:relative;
+box-shadow:0 40px 80px -30px #000c;padding:clamp(1.6rem,4vw,3rem);display:grid;grid-template-columns:1.2fr .8fr;gap:2.6rem}
+.panel::before{content:"";position:absolute;inset:10px;border:1px solid #d4af5f99;border-radius:3px;pointer-events:none}
+.lab{display:block;font:600 1.35rem var(--serif);color:var(--bord);margin-bottom:.4rem}
+#fname{width:100%;background:transparent;border:0;border-bottom:1px solid #1b2b2466;padding:.4rem 0;font:500 1.5rem var(--serif);color:#1b2b24;border-radius:0}
+#fname:focus{outline:0;border-color:var(--bord)}
+#fname.err{animation:shake .4s}
+@keyframes shake{25%{translate:-7px}75%{translate:7px}}
+.empty{color:#1b2b24aa;padding:1rem 0}
+.row{display:grid;grid-template-columns:1fr auto;gap:.5rem 1rem;align-items:center;padding:1rem 0;border-bottom:1px dashed #1b2b2430;animation:fu .5s backwards}
+.row b{font:600 1.35rem var(--serif)}
+.amt{display:flex;align-items:baseline;gap:.3rem;border-bottom:1px solid #1b2b2466;padding:0 .2rem}
+.amt input{width:6rem;border:0;background:transparent;text-align:right;font:500 1.4rem var(--serif);color:#1b2b24;padding:.2rem 0;-moz-appearance:textfield}
+.amt input:focus{outline:0}.amt:focus-within{border-color:var(--bord)}
+.amt input::-webkit-outer-spin-button,.amt input::-webkit-inner-spin-button{-webkit-appearance:none}
+.chips{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:.4rem}
+.chip{border:1px solid #1b2b2433;background:#fff8;border-radius:999px;padding:.2rem .8rem;font-size:.85rem;cursor:pointer;color:#1b2b24;transition:.2s}
+.chip:hover{background:var(--fir);color:var(--cream)}
+.chip.rm{margin-left:auto;border-color:transparent;background:none;color:#1b2b2488;text-decoration:underline}
+.recap{background:var(--fir);color:var(--cream);border-radius:4px;padding:1.7rem;align-self:start;position:sticky;top:1rem;box-shadow:inset 0 0 0 1px #d4af5f55}
+.recap h3{font:600 1.5rem var(--serif);margin-bottom:.8rem;color:var(--gold2)}
+.recap ul,.tk ul{list-style:none;padding:0}
+.recap li{display:flex;justify-content:space-between;gap:1rem;padding:.35rem 0;border-bottom:1px solid #f6efdd1f}
+.recap li.none{opacity:.6;border:0}
+.tot{display:flex;justify-content:space-between;align-items:baseline;margin:1.1rem 0 1.4rem}
+.tot span{font:500 1.2rem var(--serif)}
+.tot b{font:600 2.6rem/1 var(--serif);color:var(--gold2)}
+#hint{min-height:1.5rem;font-size:.9rem;color:#ffb7a8;margin-bottom:.6rem}
+.recap .btn{width:100%}
+
+/* Tiroir de répartition */
+.pill{position:fixed;top:clamp(.8rem,2.5vh,1.6rem);right:clamp(.8rem,2vw,1.6rem);z-index:60;padding:.7rem 1.3rem;border-radius:999px;border:0;cursor:pointer;
+background:#0c2a21cc;backdrop-filter:blur(8px);color:var(--cream);box-shadow:inset 0 0 0 1px var(--gold);font:500 .95rem var(--sans);transition:background .3s}
+.pill:hover{background:#d4af5f33}
+.pill.has{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#2a1a05;box-shadow:0 8px 24px -6px #d4af5f99;animation:bump .5s}
+@keyframes bump{40%{transform:scale(1.08)}}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(450px,94vw);z-index:70;display:flex;flex-direction:column;background:var(--grain),var(--off);color:#1b2b24;
+box-shadow:-30px 0 70px -20px #000c;transform:translateX(104%);visibility:hidden;transition:transform .6s cubic-bezier(.2,.8,.2,1),visibility 0s .6s}
+.drawer.open{transform:none;visibility:visible;transition:transform .6s cubic-bezier(.2,.8,.2,1),visibility 0s}
+.dhead{display:flex;justify-content:space-between;align-items:center;padding:1.3rem 1.5rem .3rem}
+.dhead h2{font:600 1.9rem var(--serif);color:var(--bord)}
+.dclose{border:0;background:none;font-size:2rem;line-height:1;cursor:pointer;color:#1b2b24;padding:.2rem .5rem}
+.dbody{flex:1;overflow:auto;padding:.6rem 1.5rem 1rem}
+.drawer .recap{position:static;border-radius:0;box-shadow:none;padding:1rem 1.5rem 1.3rem}
+.drawer .recap li{padding:.2rem 0;font-size:.92rem}
+.drawer .tot{margin:.8rem 0 1rem}.drawer .tot b{font-size:2.1rem}
+
+/* Confirmation */
+#merci{position:fixed;inset:0;z-index:80;overflow:auto;display:flex;padding:2.5rem 1.2rem;opacity:0;visibility:hidden;transition:opacity .7s,visibility .7s;
+background:radial-gradient(120% 90% at 50% 0,#235d48,var(--fir) 60%,#061711)}
+#merci.show{opacity:1;visibility:visible}
+.thanks{margin:auto;max-width:560px;width:100%;text-align:center}
+.thanks h2{font:500 clamp(2.4rem,8vw,4rem)/1.05 var(--serif);margin:.8rem 0 .8rem}
+.thanks h2 span{font:400 1.25em var(--script);color:var(--gold2)}
+.thanks p.t{color:#efe6cdc8;margin:0 auto 2rem;max-width:440px}
+.tk{background:var(--grain),var(--off);color:#1b2b24;border-radius:5px;padding:1.8rem 1.6rem;text-align:left;box-shadow:0 30px 60px -25px #000d;margin-bottom:1.8rem;position:relative}
+.tk::before{content:"";position:absolute;inset:8px;border:1px solid #d4af5f99;pointer-events:none}
+.tk li{display:flex;align-items:baseline;gap:.6rem;padding:.4rem 0;font:500 1.25rem var(--serif)}
+.tk li i{flex:1;border-bottom:1px dotted #1b2b2477;transform:translateY(-4px)}
+.tk li.zero{opacity:.4}
+.tk li.sum{margin-top:.6rem;padding-top:1rem;border-top:2px solid var(--bord);font:600 1.8rem var(--serif);color:var(--bord)}
+.acts{display:grid;gap:.8rem}
+.note{font-size:.85rem;color:#efe6cd99;margin-top:1.4rem}
+.back-link{background:none;border:0;color:var(--gold2);text-decoration:underline;cursor:pointer;margin-top:1rem}
+footer{text-align:center;padding:2rem 1rem 3rem;color:#efe6cd88;font:italic 1.1rem var(--serif)}
+
+@media(max-aspect-ratio:1/1){
+.fan{--w:min(32vw,26vh);--st:10.5deg}
+.drawer{top:auto;left:0;width:100%;height:84dvh;border-radius:14px 14px 0 0;transform:translateY(104%)}
+.drawer.open{transform:none}
+.pill{font-size:.85rem;padding:.6rem 1rem}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01ms!important}}
+[hidden]{display:none!important}
+#fmsg{width:100%;background:transparent;border:0;border-bottom:1px solid #1b2b2466;padding:.4rem 0;font:italic 500 1.15rem/1.4 var(--serif);color:#1b2b24;resize:none;border-radius:0}
+#fmsg:focus{outline:0;border-color:var(--bord)}
+.lab small{font:400 .8rem var(--sans);color:#1b2b2488}
+#err{color:#ffb7a8;margin-top:.8rem;min-height:1.2rem}
+</style>
+</head>
+<body>
+<canvas id="snow"></canvas>
+<div class="bokeh"></div>
+
+
+<main class="stage">
+  <div class="branch b1" data-branch></div>
+  <div class="branch b2" data-branch></div>
+  <header class="intro">
+    <div class="star fu">✦</div>
+    <h1 class="fu" style="--d:.1s">Et si cette année, vous participiez à mes prochaines aventures&nbsp;?</h1>
+    <p class="lead fu" style="--d:.3s">Pour Noël, j'ai décidé de vous proposer quelque chose d'un peu différent. Plutôt qu'un cadeau traditionnel, vous pouvez contribuer à l'un de mes projets et m'aider à concrétiser de nouvelles aventures. À vous de choisir celui qui vous inspire&nbsp;!</p>
+    <p class="tip fu" style="--d:.5s">Survolez ou touchez une enveloppe, puis sélectionnez celles qui vous parlent.</p>
+  </header>
+  <div class="fan" id="fan" role="group" aria-label="Les cinq enveloppes"></div>
+  <button class="pill" id="pill" type="button" aria-expanded="false" aria-controls="drawer"><span id="pillTxt">Ma répartition</span></button>
+</main>
+
+<aside class="drawer" id="drawer" aria-hidden="true" aria-label="Votre répartition">
+  <div class="dhead"><h2>Votre répartition</h2><button class="dclose" id="dclose" type="button" aria-label="Fermer">×</button></div>
+  <div class="dbody">
+    <label class="lab" for="fname">Votre prénom</label>
+    <input id="fname" type="text" autocomplete="given-name" placeholder="Comment vous appelez-vous ?" maxlength="40">
+    <label class="lab" for="fmsg" style="margin-top:1.4rem">Un petit mot pour moi <small>(facultatif)</small></label>
+    <textarea id="fmsg" rows="2" maxlength="400" placeholder="Un souhait, une blague, un message…"></textarea>
+    <h3 class="lab" style="margin-top:1.6rem">Vos enveloppes</h3>
+    <div id="rows"></div>
+  </div>
+  <div class="recap" aria-live="polite">
+    <ul id="recap"></ul>
+    <div class="tot"><span>Total</span><b id="total">0 €</b></div>
+    <p id="hint" role="status"></p>
+    <button class="btn" id="prep" type="button">Préparer ma participation</button>
+  </div>
+</aside>
+
+<section id="merci" aria-hidden="true" aria-label="Confirmation">
+  <div class="thanks">
+    <div class="star">✦</div>
+    <h2>Merci, <span id="mName"></span></h2>
+    <p class="t" id="mTxt">Votre participation me touche beaucoup. Voici le détail de votre répartition.</p>
+    <div class="tk"><ul id="mList"></ul></div>
+    <div class="acts" id="acts">
+      <button class="btn" id="send" type="button">Confirmer ma participation</button>
+      <button class="btn" id="wa" type="button" hidden>Envoyer par WhatsApp</button>
+      <button class="btn ghost" id="copy" type="button">Copier le récapitulatif</button>
+    </div>
+    <p id="err" role="alert"></p>
+    <p class="note" id="note"></p>
+    <button class="back-link" id="edit" type="button">Modifier ma répartition</button>
+    <button class="btn ghost" id="again" type="button" hidden>Revenir à l'accueil</button>
+  </div>
+</section>
+
+<script>
+/* ============ PARAMÈTRES À MODIFIER ============ */
+const CONFIG = {
+  // Adresse du script Google (voir les instructions). Vide = mode WhatsApp, sans enregistrement.
+  endpoint: "https://script.google.com/macros/s/AKfycbwfueboQj3i5E9Y3IGT127LW_XSQEVCFAHJEx5wKrzfrp2ierJ9B5zUUTnpIR1NCqwg/exec",
+  // Texte affiché aux participants : « je découvrirai votre participation ... »
+  revealText: "le 25 décembre",
+  // true = proposer aussi le bouton WhatsApp quand l'enregistrement est actif
+  whatsappBackup: false,
+  // Numéro WhatsApp au format international, sans « + », sans espaces ni zéro initial (ex. France : 33612345678)
+  whatsappNumber: "33695618732",
+  // Message de Noël ajouté à la fin du récapitulatif
+  personalMessage: "Joyeux Noël, et merci de me laisser participer à tes projets ! J'ai hâte de suivre tes aventures 🎅",
+  // Les enveloppes (5 attendues) : renommez-les ici
+  projects: [
+    "Moto et équipements",
+    "Atelier de bricolage",
+    "Ascension du Toubkal",
+    "Voyages",
+    "Surprise"
+  ]
+};
+/* ================================================ */
+
+const $ = s => document.querySelector(s);
+const P = CONFIG.projects;
+const S = P.map(() => ({ sel: false, amt: 0 }));
+const ROMAN = ["I", "II", "III", "IV", "V"];
+const reduce = matchMedia("(prefers-reduced-motion:reduce)").matches;
+const eur = n => new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", maximumFractionDigits: 2 }).format(n);
+const eurTxt = n => eur(n).replace(/[\u202f\u00a0]/g, " ");
+const esc = t => t.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const total = () => S.reduce((a, s) => a + (s.sel ? s.amt : 0), 0);
+
+/* Branches de sapin */
+document.querySelectorAll("[data-branch]").forEach(el => {
+  let g = '<path d="M100 0C96 140 104 280 100 420" stroke="#d4af5f" stroke-width="2" fill="none"/>';
+  for (let i = 1; i < 19; i++) {
+    const y = i * 22, l = 78 - i * 2.8, e = y + l * .55;
+    g += `<path d="M100 ${y}L${100 - l} ${e}M100 ${y}L${100 + l} ${e}" stroke="#d4af5f" stroke-width="1.4" stroke-linecap="round"/>`;
+    if (i % 5 === 0) g += `<circle cx="${100 - l * .55}" cy="${y + l * .3}" r="4.5" fill="#8f2b42"/><circle cx="${100 + l * .55}" cy="${y + l * .3}" r="4.5" fill="#8f2b42"/>`;
+  }
+  el.innerHTML = `<svg viewBox="0 0 200 420" width="100%">${g}</svg>`;
+});
+
+/* Neige */
+(() => {
+  const c = $("#snow"), x = c.getContext("2d");
+  let w, h; const rs = () => { w = c.width = innerWidth; h = c.height = innerHeight; };
+  rs(); addEventListener("resize", rs);
+  const f = Array.from({ length: innerWidth < 700 ? 34 : 70 }, () => ({ x: Math.random() * innerWidth, y: Math.random() * innerHeight, r: .6 + Math.random() * 2.2, v: .25 + Math.random() * .7, d: Math.random() * 6.28 }));
+  const draw = () => {
+    x.clearRect(0, 0, w, h);
+    f.forEach(p => {
+      if (!reduce) { p.y += p.v; p.d += .012; p.x += Math.sin(p.d) * .4; if (p.y > h + 6) { p.y = -6; p.x = Math.random() * w; } }
+      x.fillStyle = `rgba(255,250,235,${.25 + p.r / 4})`; x.beginPath(); x.arc(p.x, p.y, p.r, 0, 7); x.fill();
+    });
+    if (!reduce) requestAnimationFrame(draw);
+  };
+  draw();
+})();
+
+/* Enveloppes */
+const shelf = $("#fan");
+shelf.innerHTML = P.map((n, i) => `<div class="slot" style="--k:${i - (P.length - 1) / 2};--z:${3 - Math.round(Math.abs(i - (P.length - 1) / 2))}"><div class="env e${i + 1}" style="--i:${i}" tabindex="0" role="button" aria-pressed="false" aria-label="${esc(n)}">
+<i class="glow"></i><div class="back"></div><div class="flap"></div><div class="letter"><span>✦</span></div><div class="front"></div>
+<div class="name"><span>${esc(n)}</span></div><div class="seal">${ROMAN[i] || i + 1}</div><i class="tick">✓</i></div></div>`).join("");
+const envs = [...shelf.querySelectorAll(".env")];
+
+function spark(el, n = 10) {
+  if (reduce) return;
+  for (let k = 0; k < n; k++) {
+    const s = document.createElement("span"); s.className = "sp";
+    s.style.setProperty("--dx", (Math.random() * 240 - 120) + "px");
+    s.style.setProperty("--dy", (-20 - Math.random() * 130) + "px");
+    s.style.animationDelay = Math.random() * .25 + "s";
+    el.appendChild(s); setTimeout(() => s.remove(), 1500);
+  }
+}
+function toggle(i) {
+  const s = S[i], el = envs[i];
+  s.sel = !s.sel; if (!s.sel) s.amt = 0;
+  el.classList.toggle("sel", s.sel); el.setAttribute("aria-pressed", s.sel);
+  if (s.sel) spark(el, 16);
+  renderRows(); renderRecap();
+}
+envs.forEach((el, i) => {
+  // Souris : survol ; tactile : un toucher sélectionne (et ouvre) l'enveloppe
+  el.addEventListener("pointerenter", e => { if (e.pointerType === "mouse") { el.classList.add("on"); spark(el); } });
+  el.addEventListener("pointerleave", () => el.classList.remove("on"));
+  el.addEventListener("focus", () => { el.classList.add("on"); });
+  el.addEventListener("blur", () => el.classList.remove("on"));
+  el.addEventListener("click", () => toggle(i));
+  el.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(i); } });
+});
+
+/* Répartition */
+const rows = $("#rows");
+function renderRows() {
+  const ids = S.map((s, i) => s.sel ? i : -1).filter(i => i >= 0);
+  rows.innerHTML = ids.length ? ids.map(i => `<div class="row" data-i="${i}"><b>${esc(P[i])}</b>
+<label class="amt"><input type="number" inputmode="decimal" min="0" step="any" placeholder="0" value="${S[i].amt || ""}" aria-label="Montant en euros pour ${esc(P[i])}"><span>€</span></label>
+<div class="chips"><button class="chip" type="button" data-add="10">+10 €</button><button class="chip" type="button" data-add="20">+20 €</button><button class="chip" type="button" data-add="50">+50 €</button><button class="chip rm" type="button" data-rm>Retirer</button></div></div>`).join("")
+    : `<p class="empty">Aucune enveloppe choisie pour l'instant. Touchez-en une plus haut pour commencer.</p>`;
+}
+function renderRecap() {
+  const ids = S.map((s, i) => s.sel ? i : -1).filter(i => i >= 0);
+  $("#recap").innerHTML = ids.length ? ids.map(i => `<li><span>${esc(P[i])}</span><b>${eur(S[i].amt)}</b></li>`).join("") : `<li class="none">Rien de sélectionné</li>`;
+  $("#total").textContent = eur(total());
+  const n = ids.length;
+  $("#pillTxt").textContent = n ? `Ma répartition · ${n} · ${eur(total())}` : "Ma répartition";
+  $("#pill").classList.toggle("has", n > 0);
+}
+rows.addEventListener("input", e => {
+  const i = +e.target.closest(".row").dataset.i;
+  S[i].amt = Math.max(0, parseFloat(e.target.value) || 0); renderRecap();
+});
+rows.addEventListener("click", e => {
+  const row = e.target.closest(".row"); if (!row) return;
+  const i = +row.dataset.i;
+  if (e.target.dataset.rm !== undefined) return toggle(i);
+  if (e.target.dataset.add) {
+    S[i].amt = Math.round((S[i].amt + +e.target.dataset.add) * 100) / 100;
+    row.querySelector("input").value = S[i].amt; renderRecap();
+  }
+});
+renderRows(); renderRecap();
+
+/* Tiroir */
+function setDrawer(o) {
+  const d = $("#drawer"); d.classList.toggle("open", o); d.setAttribute("aria-hidden", !o); $("#pill").setAttribute("aria-expanded", o);
+}
+$("#pill").addEventListener("click", () => setDrawer(!$("#drawer").classList.contains("open")));
+$("#dclose").addEventListener("click", () => setDrawer(false));
+
+/* Confirmation */
+function recapText() {
+  const name = $("#fname").value.trim();
+  const lines = P.map((n, i) => `• ${n} : ${eurTxt(S[i].sel ? S[i].amt : 0)}`).join("\n");
+  return `🎄 Joyeux Noël ! C'est ${name}.\n\nVoici ma participation à tes prochaines aventures :\n${lines}\n\n✨ Total : ${eurTxt(total())}\n\n${$("#fmsg").value.trim() || CONFIG.personalMessage}`;
+}
+const merci = $("#merci");
+function openMerci() {
+  setDrawer(false);
+  const ep = !!CONFIG.endpoint;
+  $("#send").hidden = !ep; $("#wa").hidden = ep && !CONFIG.whatsappBackup; $("#err").textContent = "";
+  $("#note").textContent = ep
+    ? `Aucun paiement n'a lieu sur ce site : je découvrirai votre participation ${CONFIG.revealText}, puis nous nous arrangerons pour le versement.`
+    : "Aucun paiement n'a lieu sur ce site : le message part par WhatsApp, et nous nous arrangeons ensuite pour le versement.";
+  $("#mName").textContent = $("#fname").value.trim();
+  $("#mList").innerHTML = P.map((n, i) => { const a = S[i].sel ? S[i].amt : 0; return `<li class="${a ? "" : "zero"}"><span>${esc(n)}</span><i></i><b>${eur(a)}</b></li>`; }).join("")
+    + `<li class="sum"><span>Total</span><i></i><b>${eur(total())}</b></li>`;
+  merci.classList.add("show"); merci.setAttribute("aria-hidden", "false"); merci.scrollTop = 0;
+  document.body.style.overflow = "hidden";
+  spark(merci.querySelector(".star"), 24);
+}
+function closeMerci() { merci.classList.remove("show"); merci.setAttribute("aria-hidden", "true"); document.body.style.overflow = ""; }
+$("#prep").addEventListener("click", () => {
+  const f = $("#fname"), hint = $("#hint"); hint.textContent = "";
+  if (!f.value.trim()) {
+    hint.textContent = "Indiquez votre prénom pour continuer.";
+    f.classList.remove("err"); void f.offsetWidth; f.classList.add("err"); f.focus(); return;
+  }
+  if (!S.some(s => s.sel)) { hint.textContent = "Choisissez au moins une enveloppe dans l'éventail."; return; }
+  openMerci();
+});
+$("#edit").addEventListener("click", () => { closeMerci(); setDrawer(true); });
+addEventListener("keydown", e => { if (e.key === "Escape") merci.classList.contains("show") ? closeMerci() : setDrawer(false); });
+$("#wa").addEventListener("click", () => {
+  const num = String(CONFIG.whatsappNumber).replace(/\D/g, "");
+  window.open(`https://wa.me/${num}?text=${encodeURIComponent(recapText())}`, "_blank", "noopener");
+});
+const payload = () => ({
+  prenom: $("#fname").value.trim(), mot: $("#fmsg").value.trim(), total: total(),
+  projets: P.map((n, i) => ({ nom: n, montant: S[i].sel ? S[i].amt : 0 }))
+});
+$("#send").addEventListener("click", async e => {
+  const b = e.currentTarget; b.disabled = true; b.textContent = "Envoi en cours…"; $("#err").textContent = "";
+  try {
+    await fetch(CONFIG.endpoint, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload()) });
+    $("#mTxt").textContent = `C'est bien enregistré. Je découvrirai votre participation ${CONFIG.revealText}. Merci de tout cœur !`;
+    ["#acts", "#edit", "#note"].forEach(q => $(q).hidden = true); $("#again").hidden = false;
+    spark($("#merci .star"), 30);
+  } catch {
+    b.disabled = false; b.textContent = "Confirmer ma participation";
+    $("#err").textContent = "L'envoi n'a pas abouti. Vérifiez votre connexion puis réessayez.";
+  }
+});
+$("#again").addEventListener("click", () => location.reload());
+$("#copy").addEventListener("click", async e => {
+  const b = e.currentTarget, t = recapText();
+  try { await navigator.clipboard.writeText(t); }
+  catch { const a = document.createElement("textarea"); a.value = t; document.body.appendChild(a); a.select(); document.execCommand("copy"); a.remove(); }
+  b.textContent = "Copié ✓"; setTimeout(() => b.textContent = "Copier le récapitulatif", 2200);
+});
+
+</script>
+</body>
+</html>
