@@ -55,9 +55,9 @@ body{height:100dvh;overflow:hidden}
 @keyframes sway{from{transform:rotate(var(--a))}to{transform:rotate(calc(var(--a) + 5deg))}}
 
 /* Éventail */
-.fan{--w:min(15vw,27vh);--st:16deg;position:absolute;left:50%;bottom:calc(var(--w)*-2.4);width:0;height:0;z-index:2}
+.fan{--w:min(15vw,27vh);--st:13deg;position:absolute;left:50%;bottom:calc(var(--w)*-2.62);width:0;height:0;z-index:2}
 .slot{position:absolute;left:0;bottom:0;width:var(--w);z-index:var(--z);transform-origin:0 100%;
-transform:rotate(calc(var(--k)*var(--st))) translate(-50%,calc(var(--w)*-2.3));pointer-events:none}
+transform:rotate(calc(var(--k)*var(--st))) translate(-50%,calc(var(--w)*-3));pointer-events:none}
 .slot:has(.on),.slot:has(.sel){z-index:8}
 
 /* Enveloppes (format portrait) */
@@ -65,7 +65,7 @@ transform:rotate(calc(var(--k)*var(--st))) translate(-50%,calc(var(--w)*-2.3));p
 transition:transform .55s cubic-bezier(.2,.8,.2,1);animation:drop 1.1s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(.3s + var(--i)*.12s)}
 @keyframes drop{from{opacity:0;transform:translateY(140px)}}
 .env>*{position:absolute;inset:0;border-radius:5px;pointer-events:none}
-.env.on,.env.sel{transform:translateY(-9%) scale(1.05)}
+.env.on,.env.sel{transform:translateY(-9%) rotate(calc(var(--k)*-3deg)) scale(1.05)}
 .env:focus-visible .back{box-shadow:0 0 0 2px var(--gold2)}
 .back{background:var(--grain),var(--p2);box-shadow:0 20px 40px -14px #000d,0 4px 10px #0006;transition:box-shadow .4s}
 .front{z-index:3;clip-path:polygon(0 0,50% 37%,100% 0,100% 100%,0 100%);
@@ -81,7 +81,7 @@ transition:transform .65s cubic-bezier(.3,.7,.2,1),z-index 0s .3s,filter .6s}
 .letter{inset:7% 9% 14%;z-index:2;background:var(--grain),#fbf5e4;display:grid;justify-items:center;align-content:start;padding-top:.5rem;
 color:var(--gold);transition:transform .75s cubic-bezier(.3,.7,.2,1);box-shadow:inset 0 0 0 1px #0002}
 .env.on .letter,.env.sel .letter{transform:translateY(-30%)}
-.name{inset:46% 7% 7%;z-index:4;display:grid;place-items:center;text-align:center;font:var(--script);font-size:calc(var(--w)*.15);line-height:1.05;color:var(--ink)}
+.name{inset:44% 7% 14%;z-index:4;display:grid;place-items:center;text-align:center;font:var(--script);font-size:calc(var(--w)*.15);line-height:1.05;color:var(--ink)}
 .name span{display:block;opacity:0;transform:translateY(14px) scale(.9);filter:blur(5px);letter-spacing:.12em;transition:all .5s cubic-bezier(.2,.8,.2,1)}
 .env.on .name span,.env.sel .name span{opacity:1;transform:none;filter:none;letter-spacing:0;transition:all .9s cubic-bezier(.2,.8,.2,1) .3s;text-shadow:0 1px 0 #0003}
 .seal{inset:auto;left:50%;top:37%;width:calc(var(--w)*.25);aspect-ratio:1;border-radius:50%;translate:-50% -50%;z-index:6;display:grid;place-items:center;
@@ -97,7 +97,7 @@ font-weight:700;scale:0;transition:scale .45s cubic-bezier(.3,1.7,.5,1);z-index:
 .sp{position:absolute;left:50%;top:40%;width:5px;height:5px;border-radius:50%;background:var(--gold2);box-shadow:0 0 9px 2px #f3d98e;z-index:8;pointer-events:none;animation:sp 1.1s ease-out forwards}
 @keyframes sp{to{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0}}
 .e1{--p:#7a1f33;--p2:#551225;--p3:#962c45;--ink:#f6e7c1}
-.e1 .front::after{left:0;right:0;bottom:13%;height:5%;background:linear-gradient(var(--gold2),#a8832f)}
+.e1 .front::after{left:0;right:0;bottom:4%;height:5%;background:linear-gradient(var(--gold2),#a8832f)}
 .e2{--p:#c6a574;--p2:#a2825a;--p3:#d9bf93;--ink:#3b2a17}
 .e2 .seal{background:radial-gradient(circle at 35% 30%,#4f8a6d,#1f5a45 60%,#0c2a21)}
 .e3{--p:#1f5a45;--p2:#12392c;--p3:#2c7157;--ink:#f6e7c1}
@@ -175,7 +175,7 @@ background:radial-gradient(120% 90% at 50% 0,#235d48,var(--fir) 60%,#061711)}
 footer{text-align:center;padding:2rem 1rem 3rem;color:#efe6cd88;font:italic 1.1rem var(--serif)}
 
 @media(max-aspect-ratio:1/1){
-.fan{--w:min(32vw,26vh);--st:10.5deg}
+.fan{--w:min(30vw,24vh);--st:9deg}
 .drawer{top:auto;left:0;width:100%;height:84dvh;border-radius:14px 14px 0 0;transform:translateY(104%)}
 .drawer.open{transform:none}
 .pill{font-size:.85rem;padding:.6rem 1rem}}
@@ -185,6 +185,7 @@ footer{text-align:center;padding:2rem 1rem 3rem;color:#efe6cd88;font:italic 1.1r
 #fmsg:focus{outline:0;border-color:var(--bord)}
 .lab small{font:400 .8rem var(--sans);color:#1b2b2488}
 #err{color:#ffb7a8;margin-top:.8rem;min-height:1.2rem}
+.e5 .name span{background:var(--p3);padding:.08em .5em;border-radius:3px;box-shadow:0 2px 8px #0005}
 </style>
 </head>
 <body>
@@ -245,13 +246,13 @@ footer{text-align:center;padding:2rem 1rem 3rem;color:#efe6cd88;font:italic 1.1r
 /* ============ PARAMÈTRES À MODIFIER ============ */
 const CONFIG = {
   // Adresse du script Google (voir les instructions). Vide = mode WhatsApp, sans enregistrement.
-  endpoint: "https://script.google.com/macros/s/AKfycbwfueboQj3i5E9Y3IGT127LW_XSQEVCFAHJEx5wKrzfrp2ierJ9B5zUUTnpIR1NCqwg/exec",
+  endpoint: "",
   // Texte affiché aux participants : « je découvrirai votre participation ... »
   revealText: "le 25 décembre",
   // true = proposer aussi le bouton WhatsApp quand l'enregistrement est actif
   whatsappBackup: false,
   // Numéro WhatsApp au format international, sans « + », sans espaces ni zéro initial (ex. France : 33612345678)
-  whatsappNumber: "33695618732",
+  whatsappNumber: "33600000000",
   // Message de Noël ajouté à la fin du récapitulatif
   personalMessage: "Joyeux Noël, et merci de me laisser participer à tes projets ! J'ai hâte de suivre tes aventures 🎅",
   // Les enveloppes (5 attendues) : renommez-les ici
